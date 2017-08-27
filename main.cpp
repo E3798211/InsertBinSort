@@ -5,13 +5,68 @@
 #define MAX_INPUT_SIZE 10
 
 using namespace std;
-
+/// Gets User's input, checks it and returns integer.
+/**
+    Gets string and interpretes it as an integer.
+    Asks User for imput untill he makes it correct.
+*/
 int  SecureUserInput();
+
+/// Insert-sort that uses BinSearch in it.
+/**
+    Faster version of Insert-Sort.
+    Uses BinSearch instead of brute force.
+
+    \param [in, out] arr_to_sort Array that is going to be sorted.
+    \param [in] elements_amnt Amount of elements in array.
+*/
 int* InsertBinSort(int* arr_to_sort, size_t elements_amnt);
+
+/// Recurrent BinSearch.
+/**
+    \param [in, out] arr_sorted Sorted array where you want to place new element.
+    \param [in] start_pos First position of search area.
+    \param [in] end_pos Last position of search area.
+    \param [in] curr_elem Value of element you want to place in.
+*/
 int  BinSearchR(int* arr_sorted, int start_pos, int end_pos, int curr_elem);
+
+/// Cyclic BinSearch.
+/**
+    \param [in, out] arr_sorted Sorted array where you want to place new element.
+    \param [in] start_pos First position of search area.
+    \param [in] end_pos Last position of search area.
+    \param [in] curr_elem Value of element you want to place in.
+*/
 int  BinSearchC(int* arr_sorted, int start_pos, int end_pos, int curr_elem);
+
+/// Fills array with random numbers.
+/**
+    Fills array with random numbers, that are less than max_elem_value.
+
+    \param [in, out] arr_to_fill Array to be filled.
+    \param [in] elements_amnt Amount of elements in array.
+    \param [in] max_elem_value Max size of element in array. 99 by default.
+*/
 int* FillArray(int* arr_to_fill, size_t elements_amnt, int max_elem_value = 100);
+
+/// Prints array.
+/**
+    \param [in] arr_to_print Array that is going to be printed.
+    \param [in] elements_amnt Amount of elements in array.
+*/
 void PrintArray(int* arr_to_print, size_t elements_amnt);
+
+/// Inserts element in array.
+/**
+    Places element between start_pos and end_pos.
+
+    \param [in, out] arr_to_ins_in Array where new element inserts
+    \param [in] start_pos First position of insert area.
+    \param [in] end_pos Last position of insert area.
+    \param [in] new_elem_pos New element's position.
+    \param [in] new_elem_value Value of element to insert.
+*/
 void ElemInsert(int* arr_to_ins_in, int start_pos, int end_pos,
                 int new_elem_pos, int new_elem_value);
 
@@ -36,7 +91,6 @@ int main()
 
     cout << "After:" << endl;
     PrintArray(arr, elements_amnt);
-
 }
 
 //========================================================================
@@ -141,7 +195,7 @@ void PrintArray(int* arr_to_print, size_t elements_amnt)
     assert(elements_amnt >= 0);
 
     for(int i = 0; i < elements_amnt; i++)
-        cout << "arr[" << i << "] = " << arr_to_print[i] << endl;
+        cout << "arr[" << i << "]\t=  " << arr_to_print[i] << endl;
 }
 
 void ElemInsert(int* arr_to_ins_in, int start_pos, int end_pos,

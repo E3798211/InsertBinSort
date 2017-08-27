@@ -81,7 +81,15 @@ int main()
     cout << "Enter size: ";
     int elements_amnt = SecureUserInput();
 
-    int* arr = new int [elements_amnt];
+    int* arr = nullptr;
+    try{
+        arr = new int [elements_amnt];
+    }
+    catch (bad_alloc){
+        cout << "Bad allocation." << endl;
+        return -1;
+    }
+
     arr = FillArray(arr, elements_amnt);
 
     cout << "Before:" << endl;

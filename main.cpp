@@ -9,6 +9,8 @@ int* InsertBinSort(int* arr_to_sort, int elements_amnt);
 int  BinSearch(int* arr_sorted, int start_pos, int end_pos, int curr_elem);
 int* FillArray(int* arr_to_fill, int elements_amnt, int max_elem_value = 100);
 void PrintArray(int* arr_to_print, int elements_amnt);
+void ElemInsert(int* arr_to_ins_in, int start_pos, int end_pos,
+                int new_elem_pos, int new_elem_value);
 
 
 int main()
@@ -62,13 +64,10 @@ int* InsertBinSort(int* arr_to_sort, int elements_amnt)
     //  is considered sorted.
     int current_pos = 1;
     while(current_pos < elements_amnt){
-        int current_elem = arr_to_sort[current_pos];
-        int new_pos = BinSearch(arr_to_sort, 0, current_pos, current_elem);
+        int current_elem_value = arr_to_sort[current_pos];
+        int new_pos = BinSearch(arr_to_sort, 0, current_pos, current_elem_value);
 
-        //Replacing elements
-        for(int i = current_pos; i > new_pos; i--)
-            arr_to_sort[i] = arr_to_sort[i - 1];
-        arr_to_sort[new_pos] = current_elem;
+        ElemInsert(arr_to_sort, 0, current_pos, new_pos, current_elem_value);
 
         //Going for next element
         current_pos++;
@@ -80,7 +79,10 @@ int* InsertBinSort(int* arr_to_sort, int elements_amnt)
 int  BinSearch(int* arr_sorted, int start_pos, int end_pos, int curr_elem)
 {
     //Exceptions
+    assert(arr_sorted != nullptr);
     assert(end_pos >= start_pos);
+    assert(start_pos >= 0);
+    assert(end_pos >= 0);
 
     if(end_pos > start_pos){
         int middle_pos = (end_pos + start_pos)/2;
@@ -98,6 +100,11 @@ int  BinSearch(int* arr_sorted, int start_pos, int end_pos, int curr_elem)
 
 int* FillArray(int* arr_to_fill, int elements_amnt, int max_elem_value)
 {
+    //Exceptions
+    assert(arr_to_fill != nullptr);
+    assert(elements_amnt >= 0);
+    assert(max_elem_value > 0);
+
     for(int i = 0; i < elements_amnt; i++)
         arr_to_fill[i] = rand() % max_elem_value;
     return arr_to_fill;
@@ -105,6 +112,27 @@ int* FillArray(int* arr_to_fill, int elements_amnt, int max_elem_value)
 
 void PrintArray(int* arr_to_print, int elements_amnt)
 {
+    //Exceptions
+    assert(arr_to_print!= nullptr);
+    assert(elements_amnt >= 0);
+
     for(int i = 0; i < elements_amnt; i++)
         cout << "arr[" << i << "] = " << arr_to_print[i] << endl;
 }
+
+void ElemInsert(int* arr_to_ins_in, int start_pos, int end_pos,
+                int new_elem_pos, int new_elem_value)
+{
+    //Exceptions
+    assert(arr_to_ins_in != nullptr);
+    assert(start_pos >= 0);
+    assert(end_pos >= 0);
+    assert(end_pos >= start_pos);
+    assert(new_elem_pos >= start_pos);
+    assert(new_elem_pos <=  end_pos);
+
+    for(int i = end_pos; i > new_elem_pos; i--)
+        arr_to_ins_in[i] = arr_to_ins_in[i - 1];
+    arr_to_ins_in[new_elem_pos] = new_elem_value;
+}
+

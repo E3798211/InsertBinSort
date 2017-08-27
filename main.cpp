@@ -7,6 +7,8 @@ using namespace std;
 int  SecureUserInput();
 int* InsertBinSort(int* arr_to_sort, int elements_amnt);
 int  BinSearch(int* arr_sorted, int start_pos, int end_pos, int curr_elem);
+int* FillArray(int* arr_to_fill, int elements_amnt, int max_elem_value = 100);
+void PrintArray(int* arr_to_print, int elements_amnt);
 
 
 int main()
@@ -18,19 +20,15 @@ int main()
     int elements_amnt = SecureUserInput();
 
     int* arr = new int [elements_amnt];
-    for(int i = 0; i < elements_amnt; i++)
-        arr[i] = rand() % 100;
-
+    arr = FillArray(arr, elements_amnt);
 
     cout << "Before:" << endl;
-    for(int i = 0; i < elements_amnt; i++)
-        cout << "arr[" << i << "] = " << arr[i] << endl;
+    PrintArray(arr, elements_amnt);
 
     arr = InsertBinSort(arr, elements_amnt);
 
     cout << "After:" << endl;
-    for(int i = 0; i < elements_amnt; i++)
-        cout << "arr[" << i << "] = " << arr[i] << endl;
+    PrintArray(arr, elements_amnt);
 
 }
 
@@ -96,4 +94,17 @@ int  BinSearch(int* arr_sorted, int start_pos, int end_pos, int curr_elem)
         return new_pos;
     }else /*if (end_pos <= start_pos)*/
         return start_pos;
+}
+
+int* FillArray(int* arr_to_fill, int elements_amnt, int max_elem_value)
+{
+    for(int i = 0; i < elements_amnt; i++)
+        arr_to_fill[i] = rand() % max_elem_value;
+    return arr_to_fill;
+}
+
+void PrintArray(int* arr_to_print, int elements_amnt)
+{
+    for(int i = 0; i < elements_amnt; i++)
+        cout << "arr[" << i << "] = " << arr_to_print[i] << endl;
 }

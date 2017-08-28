@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <assert.h>
+#include <string>
 
 #define MAX_INPUT_SIZE 10
 
@@ -54,8 +55,9 @@ int* FillArray(int* arr_to_fill, size_t elements_amnt, int max_elem_value = 100)
 /**
     \param [in] arr_to_print Array that is going to be printed.
     \param [in] elements_amnt Amount of elements in array.
+    \param [in] name Name of the array.
 */
-void PrintArray(int* arr_to_print, size_t elements_amnt);
+void PrintArray(int* arr_to_print, size_t elements_amnt, string name = "arr");
 
 /// Inserts element in array.
 /**
@@ -199,13 +201,13 @@ int* FillArray(int* arr_to_fill, size_t elements_amnt, int max_elem_value)
     return arr_to_fill;
 }
 
-void PrintArray(int* arr_to_print, size_t elements_amnt)
+void PrintArray(int* arr_to_print, size_t elements_amnt, string name)
 {
     //Exceptions
     assert(arr_to_print!= nullptr);
 
     for(int i = 0; i < elements_amnt; i++)
-        cout << "arr[" << i << "]\t=  " << arr_to_print[i] << endl;
+        cout << name << "[" << i << "]\t=  " << arr_to_print[i] << endl;
 }
 
 void ElemInsert(int* arr_to_ins_in, int start_pos, int end_pos,

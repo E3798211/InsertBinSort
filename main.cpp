@@ -6,12 +6,23 @@
 #define MAX_INPUT_SIZE 10
 
 using namespace std;
+
 /// Gets User's input, checks it and returns integer.
 /**
     Gets string and interpretes it as an integer.
     Asks User for imput untill he makes it correct.
+
+    \param check Pointer to check function.
 */
-int  SecureUserInput();
+int  SecureUserInput(bool (*check)(int));
+
+/// Checks imput.
+/**
+    Gets imput and checks is it is out of range.
+
+    \param input User's input.
+*/
+bool ImputCheck(int input);
 
 /// Insert-sort that uses BinSearch in it.
 /**
@@ -81,7 +92,7 @@ int main()
     cout << "Enter amount of elements in array (this number should be > 0)." << endl;
     cout << "Do not forget, that your number will be interpreted as integer." << endl;
     cout << "Enter size: ";
-    int elements_amnt = SecureUserInput();
+    int elements_amnt = SecureUserInput(ImputCheck);
 
     int* arr = nullptr;
     try{
@@ -110,20 +121,30 @@ int main()
 
 //========================================================================
 
-int  SecureUserInput()
+int  SecureUserInput(bool (*imput_check)(int))
 {
     int elements_amnt = 0;
+    bool imput_correct = false;
 
-    while(elements_amnt < 1){
-        char input[MAX_INPUT_SIZE] = "";
-        scanf("%s", input);
-        sscanf(input, "%d", &elements_amnt);
+    while(!imput_correct){
+        if(scanf("%d", &elements_amnt))
+            imput_correct = imput_check(elements_amnt);
+        else
+            getchar();
 
-        if(elements_amnt <= 0)
+        //Warning about error
+        if(!imput_correct)
             cout << "Wrong input." << endl;
     }
 
     return elements_amnt;
+}
+
+bool ImputCheck(int input)
+{
+    if(input < 1)
+        return false;
+    return true;
 }
 
 int* InsertBinSort(int* arr_to_sort, size_t elements_amnt)

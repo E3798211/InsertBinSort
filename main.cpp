@@ -86,7 +86,7 @@ int main()
         arr = new int [elements_amnt];
     }
     catch (bad_alloc){
-        cout << "Can not allocate " << elements_amnt << " bytes for array." << endl;
+        cout << "main.cpp (89) Can not allocate " << elements_amnt << " bytes for array." << endl;
         return -1;
     }
 
@@ -102,6 +102,8 @@ int main()
 
     //Preventing memory leak
     delete [] arr;
+    arr = nullptr;
+
 }
 
 //========================================================================
@@ -126,7 +128,6 @@ int* InsertBinSort(int* arr_to_sort, size_t elements_amnt)
 {
     //Exceptions
     assert(arr_to_sort != nullptr);
-    assert(elements_amnt >= 0);
 
     //Sort itself
     //Part of the array before current_element is already sorted => finding position for
@@ -191,7 +192,6 @@ int* FillArray(int* arr_to_fill, size_t elements_amnt, int max_elem_value)
 {
     //Exceptions
     assert(arr_to_fill != nullptr);
-    assert(elements_amnt >= 0);
     assert(max_elem_value > 0);
 
     for(int i = 0; i < elements_amnt; i++)
@@ -203,7 +203,6 @@ void PrintArray(int* arr_to_print, size_t elements_amnt)
 {
     //Exceptions
     assert(arr_to_print!= nullptr);
-    assert(elements_amnt >= 0);
 
     for(int i = 0; i < elements_amnt; i++)
         cout << "arr[" << i << "]\t=  " << arr_to_print[i] << endl;

@@ -86,7 +86,7 @@ int main()
         arr = new int [elements_amnt];
     }
     catch (bad_alloc){
-        cout << "Bad allocation." << endl;
+        cout << "Can not allocate " << elements_amnt << " bytes for array." << endl;
         return -1;
     }
 
@@ -99,6 +99,9 @@ int main()
 
     cout << "After:" << endl;
     PrintArray(arr, elements_amnt);
+
+    //Preventing memory leak
+    delete [] arr;
 }
 
 //========================================================================
